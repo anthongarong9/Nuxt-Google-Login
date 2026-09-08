@@ -16,7 +16,12 @@ const user = ref<any>(null)
 
 onMounted(() => {
   const saved = localStorage.getItem('google_user')
-  if (saved) user.value = JSON.parse(saved)
+  if (saved) {
+    user.value = JSON.parse(saved)
+  } else {
+    // Kapag walang saved user, rekta agad sa /login page
+    navigateTo('/login')
+  }
 })
 
 const logout = () => {
