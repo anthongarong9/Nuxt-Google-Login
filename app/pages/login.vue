@@ -1,61 +1,44 @@
 <template>
-  <div 
-    class="mx-auto d-flex align-center justify-center" 
-    style="height: 90vh;">
+  <v-app>
+    <v-main>
+      <div
+        class="mx-auto d-flex align-center justify-center"
+        style="height: 100vh;">
 
-      <v-card 
-        width="500" 
-        class="py-8" 
-        rounded="xl" 
-        elevation="8">
-          <v-card-text  
-            class="text-center">
-              <v-icon 
-                size="100" 
-                color="primary">
-                mdi-account
-                  </v-icon>
-                    <h3>Welcome back, please login</h3>
-                      <v-form class="px-8">
+        <v-card
+          width="500"
+          class="py-8"
+          rounded="xl"
+          elevation="8">
+          <v-card-text class="text-center">
+            <v-icon
+              size="100"
+              color="primary">
+              mdi-account
+            </v-icon>
+            <h3>Welcome back, please login</h3>
 
-                        <v-text-field 
-                        prepend-inner-icon="mdi-account" 
-                        variant="solo-filled" 
-                        flat label="Username" 
-                        rounded>
-                        </v-text-field>
-
-                        <v-text-field 
-                        prepend-inner-icon="mdi-lock" 
-                        variant="solo-filled" 
-                        flat label="Password" 
-                        type="123" 
-                        rounded>
-                        </v-text-field>
-
-                        <v-btn 
-                        color="primary" 
-                        class="mt-3" 
-                        rounded block
-                        > Login
-                        </v-btn>
-                          
-                          <v-divider class="my-8">OR</v-divider>
-
-                        <v-btn 
-                        prepend-icon="mdi-google" 
-                        variant="flat" 
-                        color="red" 
-                        rounded block 
-                        @click="loginWithGoogle">sign in with google 
-                        </v-btn>
-        </v-form>
-      </v-card-text>
-    </v-card>
-  </div>
+            <div class="px-8 mt-6">
+              <v-btn
+                prepend-icon="mdi-google"
+                variant="flat"
+                color="red"
+                rounded
+                block
+                size="large"
+                @click="loginWithGoogle">
+                Sign in with Google
+              </v-btn>
+            </div>
+          </v-card-text>
+        </v-card>
+      </div>
+    </v-main>
+  </v-app>
 </template>
 <script setup lang="ts">
 // @ts-nocheck
+definePageMeta({ layout: false })
 const config = useRuntimeConfig()
 declare global {
  interface Window {
@@ -83,6 +66,7 @@ const loginWithGoogle = () => {
  'google_token',
  response.access_token
  )
+ useAuthUser().value = userInfo
  navigateTo('/')
  }
  })
